@@ -1,27 +1,22 @@
 {
   "name": "visual-rebase",
-  "displayName": "visual-rebase",
-  "description": "",
+  "publisher": "unk",
+  "displayName": "Visual Rebase",
+  "description": "Simplify interactive git rebase with an easy-to-use visual editor",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.110.0"
   },
   "categories": [
-    "Other"
+    "SCM Providers"
   ],
   "activationEvents": [
     "onStartupFinished"
   ],
   "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "visual-rebase.helloWorld",
-        "title": "Hello World"
-      }
-    ]
-  },
+  "contributes": {},
   "scripts": {
+    "build-vsce": "vsce package --no-yarn",
     "vscode:prepublish": "yarn run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
@@ -30,11 +25,15 @@
     "test": "vscode-test"
   },
   "devDependencies": {
+    "@secretlint/secretlint-formatter-sarif": "^11.5.0",
+    "@secretlint/secretlint-rule-no-dotenv": "^11.5.0",
+    "@secretlint/secretlint-rule-preset-recommend": "^11.4.1",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
     "@types/vscode": "^1.110.0",
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.7.1",
     "eslint": "^9.39.3",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1"
