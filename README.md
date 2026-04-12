@@ -28,3 +28,6 @@ git rebase -i HEAD~2
 * Introduced automatic interception of `git-rebase-todo` files.
 * Added a modern webview UI for managing commits.
 * Implemented a secure "Cancel Rebase" action.
+
+### 0.0.2
+* Add `Commit` button to commit and not push (if you are working on local repo/branch for example)

@@ -8,3 +8,6 @@ All notable changes to the "visual-rebase" extension will be documented in this 
 - Added automatic interception of `git-rebase-todo` files
 - Implemented visual webview interface for commits
 - Added safe "Cancel Rebase" functionality
+
+## [0.0.2] - 2026-04-03
+- Add `Commit` button to commit and not push (if you are working on local repo/branch for example)
