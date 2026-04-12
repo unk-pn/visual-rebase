@@ -68,6 +68,39 @@ export async function rebaseWebview(
         );
       }
     }
+    
+    if (message.command === "commitRebase") {
+      const updatedCommits: Commit[] = message.data;
+
+      // 1. Формируем новый текст файла
+      const newContent =
+        updatedCommits
+          .map((c) => `${c.action} ${c.hash} ${c.message}`)
+          .join("\n") +
+        "\n" +
+        comments.join("\n");
+
+      const edit = new vscode.WorkspaceEdit();
+      const fullRange = new vscode.Range(
+        document.lineAt(0).range.start,
+        document.lineAt(document.lineCount - 1).range.end,
+      );
+
+      // 2. Записываем текст и сохраняем файл
+      edit.replace(document.uri, fullRange, newContent);
+      await vscode.workspace.applyEdit(edit);
+      await document.save();
+
+      // 3. Закрываем окно (в этот момент Git просыпается и делает коммиты сам!)
+      await vscode.window.showTextDocument(document.uri);
+      await vscode.commands.executeCommand(
+        "workbench.action.closeActiveEditor",
+      );
+      panel.dispose();
+
+      // 4. Показываем сообщение об успехе
+      vscode.window.showInformationMessage("Rebase successfully applied!");
+    }
 
     if (message.command === "cancelRebase") {
       const edit = new vscode.WorkspaceEdit();

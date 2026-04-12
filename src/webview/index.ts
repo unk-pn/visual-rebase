@@ -46,6 +46,7 @@ export function webviewHtml(commits: Commit[]): string {
 
       <div class="footer">
         <button class="btn-cancel" id="cancelBtn">Cancel</button>
+        <button class="btn-commit" id="commitBtn">Commit</button>
         <button class="btn-push" id="applyBtn">Apply and Push</button>
       </div>
 
