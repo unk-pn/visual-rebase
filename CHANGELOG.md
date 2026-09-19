@@ -11,3 +11,6 @@ All notable changes to the "visual-rebase" extension will be documented in this 
 
 ## [0.0.2] - 2026-04-12
 - Add `Commit` button to commit and not push (if you are working on local repo/branch for example)
+
+## [0.0.3] - 2026-09-19
+- Refactor project structure

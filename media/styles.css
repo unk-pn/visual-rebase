@@ -1,0 +1,124 @@
+body {
+  font-family: var(--vscode-font-family);
+  color: var(--vscode-editor-foreground);
+  background-color: var(--vscode-editor-background);
+  padding: 30px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+h2 {
+  margin-top: 0;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.commits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.commit-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  background-color: var(--vscode-editorWidget-background);
+  border: 1px solid var(--vscode-widget-border);
+  border-left: 4px solid var(--vscode-textLink-foreground); 
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.commit-card:hover {
+  border-color: var(--vscode-focusBorder);
+  border-left-color: var(--vscode-textLink-foreground);
+}
+
+.commit-hash {
+  color: var(--vscode-textLink-foreground);
+  font-family: var(--vscode-editor-font-family), monospace;
+  min-width: 65px;
+  font-weight: 600;
+}
+
+.commit-message {
+  opacity: 0.9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.action-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 150px;
+}
+
+.action-container label {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.action-select {
+  background-color: var(--vscode-dropdown-background);
+  color: var(--vscode-dropdown-foreground);
+  border: 1px solid var(--vscode-dropdown-border);
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.action-select:focus {
+  border-color: var(--vscode-focusBorder);
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-bottom: 10px;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  color: var(--vscode-editor-foreground);
+  border: 1px solid var(--vscode-widget-border);
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+  background-color: var(--vscode-list-hoverBackground);
+}
+
+.btn-push {
+  background-color: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border: none;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-push:hover {
+  opacity: 0.9;
+}

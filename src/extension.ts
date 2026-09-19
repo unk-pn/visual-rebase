@@ -32,7 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
           }
         }
 
-        await rebaseWebview(commits, comments, document);
+        await rebaseWebview(commits, comments, document, context);
       }
     },
   );

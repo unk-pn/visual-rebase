@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Rebase</title>
+<link rel="stylesheet" href="{{stylesUri}}">
+</head>
+<body>
+<h2>Visual Rebase</h2>
+
+<div id="commits-list" class="commits-list"></div>
+
+<div class="action-container">
+  <label>Select Action:</label>
+  <select id="actionSelect" class="action-select">
+    <option value="squash" selected>SQUASH</option>
+    <option value="reword">REWORD</option>
+    <option value="edit">EDIT</option>
+    <option value="fixup">FIXUP</option>
+    <option value="drop">DROP</option>
+    <option value="pick">PICK</option>
+  </select>
+</div>
+
+<div class="footer">
+  <button class="btn-cancel" id="cancelBtn">Cancel</button>
+  <button class="btn-commit" id="commitBtn">Commit</button>
+  <button class="btn-push" id="applyBtn">Apply and Push</button>
+</div>
+
+<script src="{{scriptsUri}}"></script>
+</body>
+</html>

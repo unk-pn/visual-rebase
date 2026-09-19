@@ -1,21 +1,40 @@
 import { Commit } from "./types";
 import * as vscode from "vscode";
+import * as fs from "fs";
 import { exec } from "child_process";
-import { webviewHtml } from "./webview";
 
 export async function rebaseWebview(
   commits: Commit[],
   comments: string[],
   document: vscode.TextDocument,
+  context: vscode.ExtensionContext
 ) {
   const panel = vscode.window.createWebviewPanel(
     "visualRebase",
     "Visual Rebase",
     vscode.ViewColumn.Active,
-    { enableScripts: true },
+    { 
+      enableScripts: true,
+      localResourceRoots: [vscode.Uri.joinPath(context.extensionUri,  'media')]
+    },
   );
 
-  panel.webview.html = webviewHtml(commits);
+  const stylesUri = panel.webview.asWebviewUri(
+    vscode.Uri.joinPath(context.extensionUri, 'media', 'styles.css')
+  );
+  const scriptsUri = panel.webview.asWebviewUri(
+    vscode.Uri.joinPath(context.extensionUri, 'media', 'script.js')
+  );
+  const htmlPath = vscode.Uri.joinPath(context.extensionUri, 'media', 'index.html');
+
+  let html = fs.readFileSync(htmlPath.fsPath, 'utf8');
+
+  html = html.replace('{{stylesUri}}', stylesUri.toString());
+  html = html.replace('{{scriptsUri}}', scriptsUri.toString());
+
+  panel.webview.html = html;
+
+  panel.webview.postMessage({ command: "initData", data: commits });
 
   panel.webview.onDidReceiveMessage(async (message) => {
     if (message.command === "applyRebase") {

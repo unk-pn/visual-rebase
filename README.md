@@ -27,13 +27,3 @@ git rebase -i HEAD~2
 2. Open VS Code and go to the **Extensions** view (`Ctrl+Shift+X` / `Cmd+Shift+X`).
 3. Click the `...` (Views and More Actions) menu at the top right of the Extensions panel.
 4. Select **Install from VSIX...** and choose the downloaded file.
-
-## Release Notes
-### 0.0.1
-* Initial release of Visual Rebase.
-* Introduced automatic interception of `git-rebase-todo` files.
-* Added a modern webview UI for managing commits.
-* Implemented a secure "Cancel Rebase" action.
-
-### 0.0.2
-* Add `Commit` button to commit and not push (if you are working on local repo/branch for example)
