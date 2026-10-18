@@ -3,3 +3,5 @@ export interface Commit {
   hash: string;
   message: string;
 }
+
+export type Editor = "auto" | "code" | "codium" | "cursor" | "custom";

@@ -14,3 +14,8 @@ All notable changes to the "visual-rebase" extension will be documented in this 
 
 ## [0.0.3] - 2026-09-19
 - Refactor project structure
+
+## [0.0.4] - 2026-10-18
+- Add multi-editor support (VSCodium, Cursor, custom IDEs)
+- Add auto-detection of the current IDE for integrated terminal
+- Add `visualRebase.editor` and `visualRebase.customEditorCommand` configuration settings

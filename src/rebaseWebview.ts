@@ -110,7 +110,7 @@ export async function rebaseWebview(
       await vscode.workspace.applyEdit(edit);
       await document.save();
 
-      // 3. Закрываем окно (в этот момент Git просыпается и делает коммиты сам!)
+      // 3. Закрываем окно
       await vscode.window.showTextDocument(document.uri);
       await vscode.commands.executeCommand(
         "workbench.action.closeActiveEditor",

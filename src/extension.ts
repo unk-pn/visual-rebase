@@ -1,9 +1,20 @@
 import * as vscode from "vscode";
 import { Commit } from "./types";
 import { rebaseWebview } from "./rebaseWebview";
+import { updateGitSequenceEditor } from "./gitEditor";
 
 export function activate(context: vscode.ExtensionContext) {
   console.log("visual-rebase active");
+
+  updateGitSequenceEditor(context)
+
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeConfiguration((e) => {
+      if (e.affectsConfiguration("visualRebase")) {
+        updateGitSequenceEditor(context)
+      }
+    })
+  )
 
   const disposable = vscode.workspace.onDidOpenTextDocument(
     async (document) => {
