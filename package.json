@@ -13,6 +13,8 @@
   "activationEvents": [
     "onStartupFinished"
   ],
+  "repository": "https://github.com/unk-pn/visual-rebase",
+  "license": "MIT",
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
@@ -22,19 +24,33 @@
           "type": "string",
           "enum": ["auto", "code", "codium", "cursor", "custom"],
           "enumDescriptions": [
-            "Автоматически определять текущий редактор (VS Code, VSCodium, Cursor)",
+            "Automatically detect current editor (VS Code, VSCodium, Cursor)",
             "Visual Studio Code (code)",
             "VSCodium (codium)",
             "Cursor (cursor)",
-            "Своя команда (указывается в поле ниже)"
+            "Custom command (specified below)"
           ],
           "default": "auto",
-          "description": "Какой редактор вызывать при git rebase во встроенном терминале"
+          "description": "Editor to use for git rebase in the integrated terminal"
         },
         "visualRebase.customEditorCommand": {
           "type": "string",
           "default": "",
-          "description": "Команда редактора (если выбрано 'custom', например 'agy' или полный путь)"
+          "description": "Custom editor command (when 'custom' is selected, e.g. 'agy' or a binary path)"
+        },
+        "visualRebase.defaultAction": {
+          "type": "string",
+          "enum": ["squash", "fixup", "reword", "edit", "drop", "pick"],
+          "enumDescriptions": [
+            "SQUASH — combine commit into previous commit and combine messages",
+            "REWORD — keep commit and edit commit message",
+            "EDIT — stop for amending",
+            "FIXUP — combine commit into previous commit and discard message",
+            "DROP — remove commit",
+            "PICK — keep commit as is"
+          ],
+          "default": "squash",
+          "description": "Default action selected in the dropdown list"
         }
       }
     }

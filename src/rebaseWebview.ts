@@ -34,7 +34,14 @@ export async function rebaseWebview(
 
   panel.webview.html = html;
 
-  panel.webview.postMessage({ command: "initData", data: commits });
+  const config = vscode.workspace.getConfiguration("visualRebase");
+  const defaultAction = config.get<string>("defaultAction", "squash");
+
+  panel.webview.postMessage({
+    command: "initData",
+    data: commits,
+    defaultAction: defaultAction,
+  });
 
   panel.webview.onDidReceiveMessage(async (message) => {
     if (message.command === "applyRebase") {
@@ -91,7 +98,6 @@ export async function rebaseWebview(
     if (message.command === "commitRebase") {
       const updatedCommits: Commit[] = message.data;
 
-      // 1. Формируем новый текст файла
       const newContent =
         updatedCommits
           .map((c) => `${c.action} ${c.hash} ${c.message}`)
@@ -105,19 +111,16 @@ export async function rebaseWebview(
         document.lineAt(document.lineCount - 1).range.end,
       );
 
-      // 2. Записываем текст и сохраняем файл
       edit.replace(document.uri, fullRange, newContent);
       await vscode.workspace.applyEdit(edit);
       await document.save();
 
-      // 3. Закрываем окно
       await vscode.window.showTextDocument(document.uri);
       await vscode.commands.executeCommand(
         "workbench.action.closeActiveEditor",
       );
       panel.dispose();
 
-      // 4. Показываем сообщение об успехе
       vscode.window.showInformationMessage("Rebase successfully applied!");
     }
 
