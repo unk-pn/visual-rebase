@@ -1,0 +1,57 @@
+name: Release Extension
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Enable Corepack & Install dependencies
+        run: |
+          corepack enable
+          yarn install --immutable
+
+      - name: Package VSIX
+        run: yarn run build-vsce --allow-missing-repository
+
+      - name: Extract Release Notes from CHANGELOG.md
+        id: changelog
+        run: |
+          python3 -c "
+          import re, os
+          tag = os.environ.get('GITHUB_REF_NAME', '')
+          ver = tag.lstrip('v')
+          try:
+              with open('CHANGELOG.md') as f:
+                  content = f.read()
+              match = re.search(r'## \[' + re.escape(ver) + r'\][^\n]*\n(.*?)(?=\n## |\Z)', content, re.DOTALL)
+              if match:
+                  with open('release_notes.txt', 'w') as out:
+                      out.write(match.group(1).strip())
+          except Exception as e:
+              print('Warning: could not extract changelog:', e)
+          "
+        env:
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "*.vsix"
+          body_path: release_notes.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

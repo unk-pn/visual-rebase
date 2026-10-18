@@ -6,6 +6,11 @@ window.addEventListener('message', event => {
 
   if (message.command === "initData") {
     originalCommits = message.data;
+
+    if (message.defaultAction) {
+      document.getElementById('actionSelect').value = message.defaultAction;
+    }
+
     renderCommits();
   }
 });

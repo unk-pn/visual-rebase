@@ -19,3 +19,9 @@ All notable changes to the "visual-rebase" extension will be documented in this 
 - Add multi-editor support (VSCodium, Cursor, custom IDEs)
 - Add auto-detection of the current IDE for integrated terminal
 - Add `visualRebase.editor` and `visualRebase.customEditorCommand` configuration settings
+
+## [0.0.5] - 2026-10-18
+- Add `visualRebase.defaultAction` setting to configure the default rebase action (e.g. fixup, squash)
+- Full English localization for extension settings and messages
+- Add automated CI/CD release workflow via GitHub Actions
+- Add MIT License
